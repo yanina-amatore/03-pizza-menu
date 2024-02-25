@@ -47,10 +47,15 @@ const pizzaData = [
 ];
 
 function App() {
-  return <>
-  <h1>Hello React!</h1>
-  <Pizza/>
-  </>
+  return (
+    <div>
+      <Header/>
+      <Menu />
+      <Footer /> 
+    </div>
+  )
+  
+  
 }
 
 function Pizza (){
@@ -61,6 +66,34 @@ function Pizza (){
   Tomato, mozarella, spinach, and ricotta cheese
   </p>
   </>
+}
+
+function Header() {
+  return <>
+  <h1>Fast React Pizza Co.</h1>
+  </>
+
+}
+
+function Menu() {
+  return(
+    <div>
+      <h1> Our Menu</h1>
+      <Pizza/>
+      <Pizza/>
+      <Pizza/>
+      <Pizza/>
+   
+    </div>
+  )
+}
+
+function Footer() {
+  // return React.createElement('footer', null, "We are currently open!");
+  return (
+    <footer>{new Date().toLocaleDateString()}</footer>
+
+  ) 
 }
 
 // React v.18
