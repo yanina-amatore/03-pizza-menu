@@ -4,107 +4,114 @@ import './index.css'
 
 const pizzaData = [
   {
-    name: "Focaccia",
-    ingredients: "Bread with italian olive oil and rosemary",
+    name: 'Focaccia',
+    ingredients: 'Bread with italian olive oil and rosemary',
     price: 6,
-    photoName: "pizzas/focaccia.jpg",
+    photoName: 'pizzas/focaccia.jpg',
     soldOut: false,
   },
   {
-    name: "Pizza Margherita",
-    ingredients: "Tomato and mozarella",
+    name: 'Pizza Margherita',
+    ingredients: 'Tomato and mozarella',
     price: 10,
-    photoName: "pizzas/margherita.jpg",
+    photoName: 'pizzas/margherita.jpg',
     soldOut: false,
   },
   {
-    name: "Pizza Spinaci",
-    ingredients: "Tomato, mozarella, spinach, and ricotta cheese",
+    name: 'Pizza Spinaci',
+    ingredients: 'Tomato, mozarella, spinach, and ricotta cheese',
     price: 12,
-    photoName: "pizzas/spinaci.jpg",
+    photoName: 'pizzas/spinaci.jpg',
     soldOut: false,
   },
   {
-    name: "Pizza Funghi",
-    ingredients: "Tomato, mozarella, mushrooms, and onion",
+    name: 'Pizza Funghi',
+    ingredients: 'Tomato, mozarella, mushrooms, and onion',
     price: 12,
-    photoName: "pizzas/funghi.jpg",
+    photoName: 'pizzas/funghi.jpg',
     soldOut: false,
   },
   {
-    name: "Pizza Salamino",
-    ingredients: "Tomato, mozarella, and pepperoni",
+    name: 'Pizza Salamino',
+    ingredients: 'Tomato, mozarella, and pepperoni',
     price: 15,
-    photoName: "pizzas/salamino.jpg",
+    photoName: 'pizzas/salamino.jpg',
     soldOut: true,
   },
   {
-    name: "Pizza Prosciutto",
-    ingredients: "Tomato, mozarella, ham, aragula, and burrata cheese",
+    name: 'Pizza Prosciutto',
+    ingredients: 'Tomato, mozarella, ham, aragula, and burrata cheese',
     price: 18,
-    photoName: "pizzas/prosciutto.jpg",
+    photoName: 'pizzas/prosciutto.jpg',
     soldOut: false,
   },
-];
+]
 
 function App() {
   return (
-    <div className='container'>
-      <Header/>
+    <div className="container">
+      <Header />
       <Menu />
-      <Footer /> 
+      <Footer />
     </div>
   )
-  
-  
 }
-
-
 
 function Header() {
- const style= {} 
-  return(
-    <header className='header'>    
+  const style = {}
+  return (
+    <header className="header">
       <h1 style={style}>Fast React Pizza Co.</h1>
-   </header>
-
-  ) 
-  
-
+    </header>
+  )
 }
 
-function Menu() { 
-  return(
-    <main className='menu'>
-      <h2 > Our Menu</h2>
-      <ul className='pizzas'>
-        {pizzaData.map( pizza => <Pizza pizzaObj= {pizza} key={pizza.name} />          )}
-      </ul>
-      {/* <Pizza name= 'Pizza Spinaci' ingredients= 'Tomato, mozarella, spinach, and ricotta cheese' photoName= "pizzas/spinaci.jpg" price={10}/>
-      <Pizza name= 'Pizza Funghi' ingredients= 'Tomato,  ricotta cheese' photoName= "pizzas/funghi.jpg" price={9} /> */}
+function Menu() {
+  const pizzas = pizzaData
+  const numPizzas = pizzas.length
+
+  return (
+    <main className="menu">
+      <h2> Our Menu</h2>
+      {/* {numPizzas > 0 &&(
+        <ul className='pizzas'>
+          {pizzas.map( pizza => <Pizza pizzaObj= {pizza} key={pizza.name} /> )}
+        </ul>
+        )
+        } */}
+      {numPizzas > 0 ? (
+        <ul className="pizzas">
+          {pizzas.map((pizza) => (
+            <Pizza pizzaObj={pizza} key={pizza.name} />
+          ))}
+        </ul>
+      ) : (
+        <p>We are still working on our Menu, please come back later.</p>
+      )}
     </main>
   )
 }
 
-function Pizza (props){
+function Pizza(props) {
   console.log(props)
-  return <>
-  <li className='pizza'>
-    <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
-    <div>
-      <h3>{props.pizzaObj.name}</h3>
-      <p>{props.pizzaObj.ingredients}    </p>
-      <span>{props.pizzaObj.price +3}</span>
-    </div>
-  </li>
-  </>
+  return (
+    <>
+      <li className="pizza">
+        <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
+        <div>
+          <h3>{props.pizzaObj.name}</h3>
+          <p>{props.pizzaObj.ingredients} </p>
+          <span>{props.pizzaObj.price + 3}</span>
+        </div>
+      </li>
+    </>
+  )
 }
 
 function Footer() {
-  
-  const hour = new Date().getHours();
-  const openHour=11;
-  const closeHour = 22;
+  const hour = new Date().getHours()
+  const openHour = 11
+  const closeHour = 22
 
   const isOpen = hour >= openHour && hour <= closeHour
 
@@ -114,17 +121,24 @@ function Footer() {
   // else alert ('Sorry we are close') ;
 
   return (
-    <footer className='footer'>
+    <footer className="footer">
       {/* {new Date().toLocaleDateString()}. We are currently open. */}
-      { isOpen &&(
-        <div className='order'>
-          <p>{new Date().toLocaleDateString()}. We are open until {closeHour}:00. Come visit us or order online.</p>
-         <button className='btn'>Order</button>
+      {isOpen ? (
+        <div className="order">
+          <p>
+            {new Date().toLocaleDateString()}. We are open until {closeHour}:00.
+            Come visit us or order online.
+          </p>
+          <button className="btn">Order</button>
         </div>
+      ) : (
+        <p>
+          We are close atm. We're happy to welcome you between {openHour}: 00
+          and {closeHour}:00.
+        </p>
       )}
-      </footer>
-
-  ) 
+    </footer>
+  )
 }
 
 // React v.18
@@ -136,7 +150,6 @@ root.render(
 )
 
 // strictMode during development kit will render the App twice and React will check if we are using outdated parts of the React API.
-
 
 // React before 18
 // React.render(<App />, document.getElementById('root'));
