@@ -73,18 +73,17 @@ function Menu() {
   return (
     <main className="menu">
       <h2> Our Menu</h2>
-      {/* {numPizzas > 0 &&(
-        <ul className='pizzas'>
-          {pizzas.map( pizza => <Pizza pizzaObj= {pizza} key={pizza.name} /> )}
-        </ul>
-        )
-        } */}
       {numPizzas > 0 ? (
-        <ul className="pizzas">
-          {pizzas.map((pizza) => (
-            <Pizza pizzaObj={pizza} key={pizza.name} />
-          ))}
-        </ul>
+        // React Fragment      
+        // when we need to add a key <React.Fragment></React.Fragment>
+        <>
+          <p>Auathentic Italian cusine. 6 createive dishes  to choose from. All from our stone oven, all organic, all deliciuos.</p>
+          <ul className="pizzas">
+            {pizzas.map((pizza) => (
+              <Pizza pizzaObj={pizza} key={pizza.name} />
+            ))}
+          </ul>
+        </>
       ) : (
         <p>We are still working on our Menu, please come back later.</p>
       )}
