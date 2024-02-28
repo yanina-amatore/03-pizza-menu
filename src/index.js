@@ -93,7 +93,10 @@ function Menu() {
 }
 
 function Pizza(props) {
-  console.log(props)
+  
+  // early return 
+  if (props.pizzaObj.soldOut) return null
+
   return (
     <>
       <li className="pizza">
@@ -120,17 +123,12 @@ function Footer() {
   // if (hour >= openHour && hour <= closeHour) alert ('We are currently open') ;
   // else alert ('Sorry we are close') ;
 
+
   return (
     <footer className="footer">
       {/* {new Date().toLocaleDateString()}. We are currently open. */}
       {isOpen ? (
-        <div className="order">
-          <p>
-            {new Date().toLocaleDateString()}. We are open until {closeHour}:00.
-            Come visit us or order online.
-          </p>
-          <button className="btn">Order</button>
-        </div>
+        <Order closeHour={closeHour}/>
       ) : (
         <p>
           We are close atm. We're happy to welcome you between {openHour}: 00
@@ -141,6 +139,17 @@ function Footer() {
   )
 }
 
+ function Order (props){
+    return(
+    <div className="order">
+            <p>
+              {new Date().toLocaleDateString()}. We are open until {props.closeHour}:00.
+              Come visit us or order online.
+            </p>
+            <button className="btn">Order</button>
+          </div>
+  )
+ }
 // React v.18
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
